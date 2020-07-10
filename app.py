@@ -1,4 +1,4 @@
-from models import ModelSQLite
+from models import ModelBasic, ModelSQLite
 from views import View
 from controller import Controller
 
@@ -10,6 +10,7 @@ my_items = [
 ]
 
 
+#c = Controller(ModelBasic(my_items), View())
 c = Controller(ModelSQLite(my_items), View())
 
 c.show_items()

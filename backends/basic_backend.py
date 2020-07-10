@@ -1,15 +1,4 @@
-"""Este modulo simula o DB, implementando CRUD em uma lista (sem persistencia)
-
-    Raises:
-        mvc_exc.ItemAlreadyStored: Exception raised when item already stored
-        mvc_exc.ItemNotStored: Exception raised when item not stored yet
-
-    Returns:
-        [type]: [description]
-"""
-
-import mvc_exceptions as mvc_exc
-
+import exceptions.mvc_exceptions as mvc_exc
 
 items = list()
 

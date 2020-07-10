@@ -1,6 +1,6 @@
 from models import ModelBasic
 from views import View
-import mvc_exceptions as mvc_exc
+import exceptions.mvc_exceptions as mvc_exc
 
 
 class Controller:

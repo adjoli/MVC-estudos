@@ -1,5 +1,4 @@
-import basic_backend
-import sqlite_backend
+from backends import basic_backend, sqlite_backend
 
 
 class ModelBasic:
