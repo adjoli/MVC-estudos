@@ -1,5 +1,3 @@
-from models import ModelBasic
-from views import View
 import exceptions.mvc_exceptions as mvc_exc
 
 
