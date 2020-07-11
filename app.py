@@ -15,7 +15,6 @@ c = Controller(ModelSQLite(my_items), View())
 
 c.show_items()
 
-print('Deleting "wine" ...')
-c.delete_item('wine')
-
-c.show_items()
+# print('Deleting "wine" ...')
+# c.delete_item('wine')
+# c.show_items()
