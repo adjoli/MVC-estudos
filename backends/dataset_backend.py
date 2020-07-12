@@ -2,15 +2,24 @@ import dataset
 from sqlalchemy.exc import NoSuchTableError, IntegrityError
 from exceptions import mvc_exceptions as mvc_exc
 
-conn = dataset.connect('sqlite:///:memory:')
+DB_name = 'myDB'
 
-#DB_name = 'myDB'
+
+def connect_to_db(db=None):
+    if db is None:
+        mydb = ':memory:'
+        print('New connection to in-memory SQLite DB...')
+    else:
+        mydb = f'{db}.db'
+        print('New connection to SQLite DB...')
+    connection = dataset.connect(f'sqlite:///{mydb}')
+    return connection
 
 
 def create_table(conn, table_name):
     try:
-        conn.load_table(table_name)
-    except NoSuchTableError as e:
+        table = conn.get_table(table_name)
+    except Exception as e:
         print(f"Table {table_name} does not exist. It will be created now")
         conn.get_table(table_name, primary_id='name', primary_type='String')
         print(f"Created table {table_name} on database {DB_name}")
@@ -21,6 +30,7 @@ def insert_one(conn, name, price, quantity, table_name):
     try:
         table.insert(dict(name=name, price=price, quantity=quantity))
     except IntegrityError as e:
+
         raise mvc_exc.ItemAlreadyStored(
             f'"{name}" already stored in table "{table.table.name}.\nOriginal exception raised: {e}"')
 
@@ -51,8 +61,7 @@ def select_one(conn, name, table_name):
 
 def select_all(conn, table_name):
     table = conn.load_table(table_name)
-    rows = table.all()
-    return list(map(lambda x: dict(x), rows))
+    return list(map(lambda x: dict(x), table.all()))
 
 
 def update_one(conn, name, price, quantity, table_name):

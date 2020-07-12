@@ -1,4 +1,4 @@
-from models import ModelBasic, ModelSQLite
+from models import ModelBasic, ModelSQLite, ModelDataset
 from views import View
 from controller import Controller
 
@@ -10,10 +10,17 @@ my_items = [
 ]
 
 
-#c = Controller(ModelBasic(my_items), View())
-c = Controller(ModelSQLite(my_items), View())
+# c = Controller(ModelBasic(my_items), View())
+# c = Controller(ModelSQLite(my_items), View())
+c = Controller(ModelDataset(my_items), View())
 
 c.show_items()
+
+c.insert_item('chocolate', 2.78, 4)
+c.update_item('milk', 1.23, 4)
+
+c.show_items()
+
 
 # print('Deleting "wine" ...')
 # c.delete_item('wine')

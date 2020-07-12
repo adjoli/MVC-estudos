@@ -55,7 +55,7 @@ def connect(func):
 def create_table(conn, table_name):
     table_name = scrub(table_name)
     sql = f"CREATE TABLE {table_name} (" \
-        "rowid INTEGER PRIMARY KEY AUTOINCREMENT, " \
+        "id INTEGER PRIMARY KEY AUTOINCREMENT, " \
         "name TEXT UNIQUE, " \
         "price REAL, " \
         "quantity INTEGER)"

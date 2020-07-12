@@ -1,4 +1,4 @@
-from backends import basic_backend, sqlite_backend
+from backends import basic_backend, sqlite_backend, dataset_backend
 
 
 class ModelBasic:
@@ -77,37 +77,45 @@ class ModelSQLite:
 
 class ModelDataset:
     def __init__(self, application_items):
-        pass
+        self._item_type = 'product'
+        self._connection = dataset_backend.connect_to_db(
+            dataset_backend.DB_name)
+        dataset_backend.create_table(self._connection, self._item_type)
+        self.create_items(application_items)
 
     @property
     def connection(self):
-        pass
+        return self._connection
 
     @property
     def item_type(self):
-        pass
+        return self._item_type
 
     @item_type.setter
     def item_type(self, new_item_type):
-        pass
+        self._item_type = new_item_type
 
     def create_items(self, items):
-        pass
+        dataset_backend.insert_many(
+            self.connection, items, table_name=self.item_type)
 
     def create_item(self, name, price, quantity):
-        pass
+        dataset_backend.insert_one(
+            self.connection, name, price, quantity, table_name=self.item_type)
 
     def read_items(self):
-        pass
+        return dataset_backend.select_all(self.connection, table_name=self.item_type)
 
     def read_item(self, name):
-        pass
+        return dataset_backend.select_one(self.connection, name, table_name=self.item_type)
 
     def update_item(self, name, price, quantity):
-        pass
+        dataset_backend.update_one(
+            self.connection, name, price, quantity, table_name=self.item_type)
 
     def delete_item(self, name):
-        pass
+        dataset_backend.delete_one(
+            self.connection, name, table_name=self.item_type)
 
 
 class ModelMongoDB:

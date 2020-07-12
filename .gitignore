@@ -1,4 +1,7 @@
 __pycache__
 .mypy_cache
+.vscode
 venv
-myDB.db
+*.db
+*~
+*.json
