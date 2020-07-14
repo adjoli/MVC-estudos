@@ -124,9 +124,9 @@ class ModelDataset:
 class ModelSQLAlchemyORM:
     def __init__(self, application_items):
         self._item_type = 'product'
-        self._connection = sqlalchemy_orm_backend.connect_to_db()
-        # self._connection = sqlalchemy_orm_backend.connect_to_db(
-        #     sqlalchemy_orm_backend.DB_name)
+        # self._connection = sqlalchemy_orm_backend.connect_to_db()
+        self._connection = sqlalchemy_orm_backend.connect_to_db(
+            sqlalchemy_orm_backend.DB_name)
         sqlalchemy_orm_backend.create_table()
         self.create_items(application_items)
 

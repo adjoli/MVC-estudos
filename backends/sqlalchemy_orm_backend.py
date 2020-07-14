@@ -68,20 +68,38 @@ def insert_one(conn, name, price, quantity, table_name):
     try:
         conn.commit()
     except (InvalidRequestError, IntegrityError) as e:
+        conn.rollback()
         raise mvc_exc.ItemAlreadyStored(
             f'{e}: "{name}" already stored in table "{table_name}"')
 
 
 def insert_many(conn, items, table_name):
     for product in items:
-        conn.add(
-            Product(
+        try:
+            prod = Product(
                 name=product['name'],
                 price=product['price'],
                 quantity=product['quantity']
             )
-        )
-    conn.commit()
+            conn.add(prod)
+            conn.commit()
+        except (InvalidRequestError, IntegrityError) as e:
+            conn.rollback()
+            print(f"'{prod.name}' already stored in table '{table_name}'")
+
+    # for product in items:
+    #     conn.add(
+    #         Product(
+    #             name=product['name'],
+    #             price=product['price'],
+    #             quantity=product['quantity']
+    #         )
+    #     )
+    # try:
+    #     conn.commit()
+    # except (InvalidRequestError, IntegrityError) as e:
+    #     print(
+    #         f"{e}: at least one in {[x['name'] for x in items]} was already stored in table '{table_name}'")
 
 
 def select_one(conn, item_name, table_name):
