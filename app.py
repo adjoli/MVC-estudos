@@ -1,4 +1,4 @@
-from models import ModelBasic, ModelSQLite, ModelDataset
+from models import ModelBasic, ModelSQLite, ModelDataset, ModelSQLAlchemyORM
 from views import View
 from controller import Controller
 
@@ -12,16 +12,20 @@ my_items = [
 
 # c = Controller(ModelBasic(my_items), View())
 # c = Controller(ModelSQLite(my_items), View())
-c = Controller(ModelDataset(my_items), View())
+# c = Controller(ModelDataset(my_items), View())
+c = Controller(ModelSQLAlchemyORM(my_items), View())
 
 c.show_items()
 
 c.insert_item('chocolate', 2.78, 4)
+
+# ITEM REPETIDO
+# c.insert_item('milk', 2.78, 4)
+
 c.update_item('milk', 1.23, 4)
 
-c.show_items()
+# c.show_item('milks')
+c.delete_item('wine')
 
 
-# print('Deleting "wine" ...')
-# c.delete_item('wine')
-# c.show_items()
+c.show_items(bullet_points=True)
