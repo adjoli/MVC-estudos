@@ -17,7 +17,7 @@ my_items = [
 # c = Controller(ModelBasic(my_items), View())
 # c = Controller(ModelSQLite(my_items), View())
 # c = Controller(ModelDataset(my_items), View())
-# c = Controller(ModelSQLAlchemyORM(my_items), View())
+c = Controller(ModelSQLAlchemyORM(my_items), View())
 # ===================================================================
 
 c.show_items()
