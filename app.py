@@ -18,22 +18,26 @@ my_items = [
 # c = Controller(ModelBasic(my_items), View())
 # c = Controller(ModelSQLite(my_items), View())
 # c = Controller(ModelDataset(my_items), View())
-c = Controller(ModelSQLAlchemyORM(my_items), View())
-# c = Controller(ModelSQLAlchemyCore(my_items), View())
+# c = Controller(ModelSQLAlchemyORM(my_items), View())
+c = Controller(ModelSQLAlchemyCore(my_items), View())
 # ===================================================================
 
 c.show_items()
+c.show_item('bread')
 
-# EXIBINDO UM ITEM INEXISTENTE
+# # EXIBINDO UM ITEM INEXISTENTE
 c.show_item('milks')
 
 c.insert_item('chocolate', 2.78, 4)
 
-# ITEM REPETIDO
+# # ITEM REPETIDO
 c.insert_item('milk', 2.78, 4)
 
 c.update_item('milk', 1.23, 4)
 
+c.delete_item('wine')
+
+# # REMOVENDO UM ITEM REMOVIDO ANTERIORMENTE
 c.delete_item('wine')
 
 c.show_items(bullet_points=True)
