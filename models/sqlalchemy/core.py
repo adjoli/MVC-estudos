@@ -4,9 +4,9 @@ from backends import sqlalchemy_core_backend
 class ModelSQLAlchemyCore:
     def __init__(self, application_items):
         self._item_type = 'product'
-        self._connection = sqlalchemy_core_backend.connect_to_db()
-        # self._connection = sqlalchemy_core_backend.connect_to_db(
-        #     sqlalchemy_core_backend.DB_name)
+        # self._connection = sqlalchemy_core_backend.connect_to_db()
+        self._connection = sqlalchemy_core_backend.connect_to_db(
+            sqlalchemy_core_backend.DB_name)
         sqlalchemy_core_backend.create_table()
         self.create_items(application_items)
 
