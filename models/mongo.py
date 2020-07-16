@@ -5,7 +5,7 @@ class ModelMongoDB:
     def __init__(self, application_items):
         self._item_type = 'items'
         self._connection = mongodb_backend.connect_to_db()
-        # mongodb_backend.create_table()
+        mongodb_backend.create_table(self._item_type)
         self.create_items(application_items)
 
     @property

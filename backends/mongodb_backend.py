@@ -5,18 +5,18 @@ from pymongo.errors import ServerSelectionTimeoutError
 DB_NAME = 'products'
 COLLECTION_NAME = 'items'
 
+client = None
 products_collection = None
 
 
 def connect_to_db(db=None):
-    global products_collection
+    global client
 
     # TODO: Implementar conexoes diferentes de localhost
     if db is None:
         print('Connecting to MongoDB localhost...')
         try:
             client = MongoClient(serverSelectionTimeoutMS=2000)
-            products_collection = client[DB_NAME][COLLECTION_NAME]
         except ServerSelectionTimeoutError as e:
             print("Can't connect to MongoDB server")
     else:
@@ -24,7 +24,9 @@ def connect_to_db(db=None):
 
 
 def create_table(table_name):
-    pass
+    global products_collection
+    if DB_NAME not in client.list_database_names():
+        products_collection = client[DB_NAME][COLLECTION_NAME]
 
 
 def insert_one(name, price, quantity, table_name):
