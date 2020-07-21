@@ -20,8 +20,8 @@ my_items = [
 # c = Controller(ModelSQLite(my_items), View())
 # c = Controller(ModelDataset(my_items), View())
 # c = Controller(ModelSQLAlchemyORM(my_items), View())
-# c = Controller(ModelSQLAlchemyCore(my_items), View())
-c = Controller(ModelMongoDB(my_items), View())
+c = Controller(ModelSQLAlchemyCore(my_items), View())
+# c = Controller(ModelMongoDB(my_items), View())
 # ===================================================================
 
 c.show_items()
