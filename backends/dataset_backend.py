@@ -18,7 +18,8 @@ def connect_to_db(db=None):
 
 def create_table(conn, table_name):
     try:
-        table = conn.get_table(table_name)
+        table = conn.create_table(
+            table_name, primary_id='name', primary_type=conn.types.string(40))
     except Exception as e:
         print(f"Table {table_name} does not exist. It will be created now")
         conn.get_table(table_name, primary_id='name', primary_type='String')
@@ -30,7 +31,6 @@ def insert_one(conn, name, price, quantity, table_name):
     try:
         table.insert(dict(name=name, price=price, quantity=quantity))
     except IntegrityError as e:
-
         raise mvc_exc.ItemAlreadyStored(
             f'"{name}" already stored in table "{table.table.name}.\nOriginal exception raised: {e}"')
 

@@ -7,6 +7,8 @@ verify_ssl = true
 mypy = "*"
 flake8 = "*"
 autopep8 = "*"
+faker = "*"
+pytest = "*"
 
 [packages]
 alembic = "==1.4.2"
